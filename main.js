@@ -1,0 +1,491 @@
+/* ============================================
+   THE STARGAZERS — site styles
+   Palette pulled from the band's own logo artwork:
+   harvest-moon orange, deep warm brown-black, parchment cream.
+   ============================================ */
+
+:root {
+  /* Color tokens — derived from the logo art */
+  --color-ink: #1a1410;          /* near-black warm brown, not true black */
+  --color-text: #2d2520;         /* body text, soft charcoal-brown */
+  --color-moon: #f0a868;         /* primary accent — the moon's glow */
+  --color-moon-deep: #d98a4e;    /* deeper moon-orange for hover/contrast */
+  --color-terracotta: #8b5a3c;   /* secondary accent — moon's shadow tones */
+  --color-cream: #fdf6ec;        /* main background, soft parchment */
+  --color-card: #f7f1e3;         /* section/card background, slightly deeper cream */
+  --color-line: #e3d4bc;         /* hairline rules and borders */
+
+  /* Type */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+
+  /* Spacing rhythm */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 7rem;
+
+  --max-width: 1140px;
+  --radius: 4px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-cream);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: var(--color-terracotta);
+  text-decoration: none;
+}
+
+/* ============ HEADER / NAV ============ */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(253, 246, 236, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+}
+
+.nav-mark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--color-ink);
+  letter-spacing: 0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-moon-deep);
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-xs);
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--color-ink);
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--color-cream);
+    border-bottom: 1px solid var(--color-line);
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-sm);
+    display: none;
+  }
+
+  .nav-links.open { display: flex; }
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140vmax;
+  height: 140vmax;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(240, 168, 104, 0.35) 0%, rgba(240, 168, 104, 0.12) 28%, rgba(253, 246, 236, 0) 55%);
+  animation: breathe 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 640px;
+}
+
+.hero-logo {
+  width: min(420px, 80vw);
+  margin: 0 auto var(--space-md);
+  filter: drop-shadow(0 12px 32px rgba(26, 20, 16, 0.18));
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--color-terracotta);
+  margin-bottom: var(--space-md);
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 40px;
+  border: 1.5px solid var(--color-terracotta);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  opacity: 0.7;
+}
+
+.scroll-cue span {
+  width: 4px;
+  height: 8px;
+  background: var(--color-terracotta);
+  border-radius: 2px;
+  animation: scrollcue 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollcue {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+/* ============ BUTTONS ============ */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+.btn-primary:hover {
+  background: var(--color-terracotta);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+  font-size: 0.85rem;
+  padding: 0.6rem 1.5rem;
+}
+
+.btn-outline:hover {
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+/* ============ SECTIONS (shared) ============ */
+
+.section {
+  padding: var(--space-xl) var(--space-md);
+}
+
+.section-alt {
+  background: var(--color-card);
+}
+
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-inner--narrow {
+  max-width: 680px;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-moon-deep);
+  margin-bottom: var(--space-xs);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  color: var(--color-ink);
+  margin-bottom: var(--space-lg);
+}
+
+/* ============ MUSIC ============ */
+
+.music-embed-wrap {
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(26, 20, 16, 0.08);
+}
+
+.music-embed {
+  display: block;
+  border: none;
+}
+
+.platform-links {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.platform-link {
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-line);
+  padding-bottom: 2px;
+}
+
+.platform-link:hover {
+  border-color: var(--color-moon-deep);
+  color: var(--color-terracotta);
+}
+
+/* ============ GALLERY ============ */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: var(--radius);
+  aspect-ratio: 1 / 1;
+}
+
+.gallery-item--wide {
+  grid-column: span 2;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+@media (max-width: 768px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item--wide { grid-column: span 2; }
+}
+
+/* ============ MERCH ============ */
+
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.merch-card {
+  text-align: center;
+}
+
+.merch-image-wrap {
+  aspect-ratio: 1 / 1;
+  background: var(--color-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.merch-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.merch-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--color-ink);
+  margin-bottom: 0.25rem;
+}
+
+.merch-price {
+  color: var(--color-terracotta);
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+}
+
+.merch-note {
+  text-align: center;
+  font-style: italic;
+  color: var(--color-terracotta);
+  font-family: var(--font-display);
+}
+
+@media (max-width: 768px) {
+  .merch-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .merch-grid { grid-template-columns: 1fr; }
+}
+
+/* ============ ABOUT ============ */
+
+.about-copy {
+  font-size: 1.05rem;
+  margin-bottom: var(--space-sm);
+}
+
+.about-copy:last-child { margin-bottom: 0; }
+
+/* ============ CONTACT ============ */
+
+.contact-copy {
+  margin-bottom: var(--space-md);
+}
+
+.contact-email {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-ink);
+  border-bottom: 1.5px solid var(--color-moon-deep);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-email:hover { color: var(--color-terracotta); }
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.social-links a {
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.social-links a:hover { color: var(--color-terracotta); }
+
+/* ============ FOOTER ============ */
+
+.site-footer {
+  text-align: center;
+  padding: var(--space-md);
+  font-size: 0.85rem;
+  color: var(--color-terracotta);
+  border-top: 1px solid var(--color-line);
+}
+
+/* ============ FOCUS STATES (accessibility) ============ */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-moon-deep);
+  outline-offset: 3px;
+}
