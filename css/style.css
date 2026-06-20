@@ -309,6 +309,9 @@ a {
 /* ============ MUSIC ============ */
 
 .music-embed-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   margin-bottom: var(--space-md);
   border-radius: var(--radius);
   overflow: hidden;
@@ -316,6 +319,11 @@ a {
 }
 
 .music-embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: block;
   border: none;
 }
