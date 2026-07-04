@@ -1,3 +1,24 @@
+// Track carousel — smooth continuous scroll via JS (no restart stutter)
+(() => {
+  const track = document.querySelector('.track-carousel-track');
+  if (!track) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  let pos = 0;
+  const speed = 0.6; // pixels per frame — raise for faster, lower for slower
+
+  function step() {
+    pos -= speed;
+    const setWidth = track.scrollWidth / 2; // half, since content is duplicated once
+    if (Math.abs(pos) >= setWidth) {
+      pos += setWidth; // wrap seamlessly, no jump
+    }
+    track.style.transform = `translateX(${pos}px)`;
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+})();
 // Starfield animation
 (() => {
   const canvas = document.getElementById('starfield');
