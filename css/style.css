@@ -512,3 +512,59 @@ a:focus-visible, button:focus-visible {
   outline: 2px solid var(--color-moon);
   outline-offset: 3px;
 }
+/* ============ TRACK CAROUSEL ============ */
+
+.track-carousel-wrap {
+  overflow: hidden;
+  margin-top: var(--space-lg);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.track-carousel-track {
+  display: flex;
+  gap: var(--space-md);
+  width: max-content;
+  animation: marquee 26s linear infinite;
+}
+
+.track-card {
+  flex: 0 0 auto;
+  width: 200px;
+  text-align: center;
+}
+
+.track-card img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-line);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.track-card:hover img {
+  transform: scale(1.04);
+  box-shadow: 0 8px 24px rgba(240, 168, 104, 0.25);
+}
+
+.track-name {
+  display: block;
+  margin-top: var(--space-xs);
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track-carousel-track { animation: none; }
+}
+
+@media (max-width: 480px) {
+  .track-card, .track-card img { width: 150px; height: 150px; }
+}
