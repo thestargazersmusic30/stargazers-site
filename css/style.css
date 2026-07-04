@@ -6,7 +6,7 @@
 
 :root {
   /* Dark space palette */
-  --color-bg: #0a0a0f;           /* deep space black */
+  --color-bg: #000000;           /* deep space black */
   --color-bg-alt: #0f0f1a;       /* slightly lighter dark for sections */
   --color-card: #13131f;         /* card/panel background */
   --color-text: #e8d5b0;         /* warm cream — reads on black */
