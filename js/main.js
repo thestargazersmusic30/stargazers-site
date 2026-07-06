@@ -1,4 +1,19 @@
-// Track carousel — smooth continuous scroll via JS (no restart stutter)
+// Hero photo slideshow — crossfade through band photos
+(() => {
+  const slides = document.querySelectorAll('.hero-slide');
+  if (!slides.length) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let current = 0;
+  slides[0].classList.add('is-active');
+  if (prefersReducedMotion) return; // show first photo only, no cycling
+
+  setInterval(() => {
+    slides[current].classList.remove('is-active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('is-active');
+  }, 5000); // 5 seconds per photo
+})();// Track carousel — smooth continuous scroll via JS (no restart stutter)
 (() => {
   const track = document.querySelector('.track-carousel-track');
   if (!track) return;
