@@ -1,18 +1,45 @@
-// Hero photo slideshow — crossfade through band photos
+// Hero slideshow — crossfades through photos, plays video slides to completion
 (() => {
   const slides = document.querySelectorAll('.hero-slide');
   if (!slides.length) return;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let current = 0;
-  slides[0].classList.add('is-active');
-  if (prefersReducedMotion) return; // show first photo only, no cycling
+  let timer = null;
 
-  setInterval(() => {
-    slides[current].classList.remove('is-active');
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('is-active'));
+    const slide = slides[index];
+    slide.classList.add('is-active');
+
+    const videoEl = slide.querySelector('video');
+
+    if (videoEl) {
+      videoEl.currentTime = 0;
+      videoEl.play().catch(() => {});
+      const duration = (videoEl.duration && !isNaN(videoEl.duration))
+        ? videoEl.duration * 1000
+        : 24000; // fallback if metadata isn't loaded yet
+      timer = setTimeout(advance, duration);
+    } else {
+      const otherVideo = slides[current] !== slide
+        ? document.querySelectorAll('.hero-slide--video video')
+        : null;
+      timer = setTimeout(advance, 5000);
+    }
+  }
+
+  function advance() {
+    clearTimeout(timer);
     current = (current + 1) % slides.length;
-    slides[current].classList.add('is-active');
-  }, 5000); // 5 seconds per photo
+    showSlide(current);
+  }
+
+  showSlide(0);
+
+  if (prefersReducedMotion) {
+    clearTimeout(timer); // show first slide only, no cycling
+  }
 })();// Track carousel — smooth continuous scroll via JS (no restart stutter)
 (() => {
   const track = document.querySelector('.track-carousel-track');
