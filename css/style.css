@@ -197,7 +197,7 @@ a { color: var(--color-moon); text-decoration: none; }
 
 .hero-inner {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   text-align: center;
   max-width: 640px;
 }
