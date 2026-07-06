@@ -593,19 +593,6 @@ a:focus-visible, button:focus-visible {
   opacity: 0.55; /* lets the starfield still twinkle through */
 }
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.55) 0%,
-    rgba(0, 0, 0, 0.35) 40%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { transition: none; }
 }
