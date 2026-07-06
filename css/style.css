@@ -301,11 +301,11 @@ a { color: var(--color-moon); text-decoration: none; }
 
 .section {
   padding: var(--space-xl) var(--space-md);
-  background: var(--color-bg);
+  background: transparent;
 }
 
 .section-alt {
-  background: var(--color-bg-alt);
+  background: rgba(15, 15, 26, 0.55);
 }
 
 .section-inner {
