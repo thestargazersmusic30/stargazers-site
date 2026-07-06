@@ -172,7 +172,6 @@ a { color: var(--color-moon); text-decoration: none; }
   justify-content: center;
   overflow: hidden;
   padding: var(--space-xl) var(--space-md);
-  background: var(--color-bg);
 }
 
 /* Starfield canvas — JS will populate this */
