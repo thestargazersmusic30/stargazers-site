@@ -187,6 +187,7 @@ a { color: var(--color-moon); text-decoration: none; }
     transparent 60%);
   animation: breathe 8s ease-in-out infinite;
   pointer-events: none;
+      z-index: 0;
 }
 
 @keyframes breathe {
