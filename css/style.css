@@ -609,3 +609,10 @@ a:focus-visible, button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { transition: none; }
 }
+.hero-slide--video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
