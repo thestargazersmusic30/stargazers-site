@@ -559,3 +559,41 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 480px) {
   .track-card, .track-card img { width: 180px; height: 180px; }
 }
+/* ============ HERO SLIDESHOW ============ */
+
+.hero-slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.8s ease;
+}
+
+.hero-slide.is-active {
+  opacity: 0.55; /* lets the starfield still twinkle through */
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.35) 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { transition: none; }
+}
